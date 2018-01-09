@@ -1,0 +1,146 @@
+import document from "document";
+
+//STEPS - ELEVATION
+import userActivity from "user-activity";
+
+let stepGoalField = document.getElementById('stepGoal');
+let currentStepsField = document.getElementById('currentSteps');
+let levelText = document.getElementById("level");
+let xpBar = document.getElementById("xp_bar");
+
+function updateSteps() {
+    currentStepsField.text = (userActivity.today.local.steps || 0)  + " /";
+    levelText.text = "Lv" + userActivity.today.local.elevationGain;
+
+    if  (userActivity.goals.steps != 0) {
+        let currentSteps = (userActivity.today.local.steps || 0);
+        let stepPercentage = currentSteps / userActivity.goals.steps;
+        xpBar.width = (currentSteps < userActivity.goals.steps)
+            ? stepPercentage * 340
+            : 340;
+    }
+}
+
+stepGoalField.text = userActivity.goals.steps || 0;
+
+//BATTERY
+import { battery } from "power";
+let batteryField = document.getElementById('battery');
+let batteryBar = document.getElementById('shield_bar');
+
+batteryField.text = Math.floor(battery.chargeLevel);
+
+function updateBattery() {
+    let batteryPercentage = Math.floor(battery.chargeLevel);
+
+    batteryField.text = batteryPercentage;
+
+    if (batteryPercentage != 0) {
+        batteryBar.width = (batteryPercentage / 100) * 171;
+    }
+}
+
+updateBattery();
+battery.onchange = () => updateBattery();
+
+//DATE
+let date = document.getElementById('date');
+let dayOfWeek = document.getElementById('dayOfWeek');
+
+let monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+];
+
+let dayNames = ["Sunday","Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"];
+
+function updateDate() {
+    let dayInfo = new Date();
+    let day = dayInfo.getDay();
+    let month = dayInfo.getMonth();
+    let dayOfMonth = dayInfo.getDate();
+
+    date.text = `${monthNames[month]} ${dayOfMonth}`;
+    dayOfWeek.text = `${dayNames[day]}`;
+}
+
+//CLOCK
+import clock from "clock";
+import * as util from "../common/utils";
+
+clock.granularity = "minutes";
+
+let time = document.getElementById("time");
+
+function updateClock() {
+    let today = new Date();
+    let hours = today.getHours();
+    hours = hours % 12;
+    hours = hours ? util.zeroPad(hours) : 12;
+    let mins = util.zeroPad(today.getMinutes());
+
+    time.text = `${hours}:${mins}`;
+    updateDate();
+}
+
+clock.ontick = () => updateClock();
+
+//HEART RATE MONITOR
+import { HeartRateSensor } from "heart-rate";
+import { user } from "user-profile";
+
+var hrm = new HeartRateSensor();
+let hrLabel = document.getElementById("hrm");
+let hrLevel = document.getElementById("hrLevel");
+let hrmLastTimeStamp = 0;
+
+hrLabel.text = "??";
+let hrCustomZoneNames = {
+    'out-of-range': 'Relaxed',
+    'fat-burn': 'Fat Burn',
+    'cardio': 'Cardio',
+    'peak': 'Peak'
+};
+
+hrm.onreading = function(read) {
+    let heartRate = hrm.heartRate;
+    let hrZone = user.heartRateZone(heartRate);
+
+    hrLabel.text = heartRate;
+    hrLevel.text = hrCustomZoneNames[`${hrZone}`];
+
+    hrm.stop();
+}
+
+hrm.onerror = function() {
+    hrLabel.text = '??';
+}
+
+hrm.start();
+
+//INTERVAL
+import { display } from "display";
+setInterval(intervalFunction, 2000);
+
+function intervalFunction() {
+    updateSteps();
+
+    if (hrmLastTimeStamp == hrm.timestamp) {
+        hrLabel.text = '??';
+        hrLevel.text = "Couch Potato";
+    } else {
+        hrmLastTimeStamp = hrm.timestamp;
+    }
+
+    if (display.on) {
+        hrm.start();
+    }
+}
+
+display.onchange = function(event) {
+    if (display.on) {
+        hrm.start();
+    } else {
+        hrm.stop();
+    }
+};

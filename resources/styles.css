@@ -1,0 +1,108 @@
+#img_health {
+    x: 39;
+    y: 224;
+    width: 207;
+    height: 17;
+}
+
+#img_s_empty {
+    x: 35;
+    y: 191;
+    width: 180;
+    height: 25;
+}
+
+#img_s_full {
+    x: 35;
+    y: 191;
+    width: 180;
+    height: 25;
+}
+
+#img_shield {
+    x: 39;
+    y: 195;
+    height: 17;
+    width: 171;
+}
+
+#img_xp {
+    x: 5;
+    y: 6;
+    width: 340;
+    height: 11;
+}
+
+.font {
+    font-family: System-Bold;
+    text-length: 32;
+}
+
+#stepGoal {
+    fill: #da8c04;
+    font-size: 23;
+    x: 50%+7;
+    y: 36;
+}
+
+#date {
+    fill: #da8c04;
+    font-size: 23;
+    text-anchor: middle;
+    x: 50%;
+    y: 32%;
+}
+
+#dayOfWeek {
+    fill: #da8c04;
+    font-size: 23;
+    text-anchor: middle;
+    x: 50%;
+    y: 65%;
+}
+
+#currentSteps {
+    fill: #da8c04;
+    font-size: 23;
+    text-anchor: end;
+    x: 50%;
+    y: 36;
+}
+
+#time {
+    fill: #da8c04;
+    font-size: 80;
+    text-anchor: middle;
+    x: 50%;
+    y: 40%+40;
+}
+
+#hrLevel {
+    fill: white;
+    font-size: 23;
+    text-anchor: middle;
+    x: 279;
+    y: 209;
+}
+
+#level {
+    fill: white;
+    font-size: 27;
+    text-anchor: middle;
+    x: 296;
+    y: 240;
+}
+
+#hrm {
+    fill: white;
+    font-size: 23;
+    x: 60;
+    y: 243;
+}
+
+#battery {
+    fill: white;
+    font-size: 23;
+    x: 60;
+    y: 206;
+}
