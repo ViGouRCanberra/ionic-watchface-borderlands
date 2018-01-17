@@ -36,7 +36,8 @@ function updateBattery() {
     batteryField.text = batteryPercentage;
 
     if (batteryPercentage != 0) {
-        batteryBar.width = (batteryPercentage / 100) * 171;
+        // batteryBar.width = (batteryPercentage / 100) * 171;
+        batteryBar.x = 39 - (171 - ((batteryPercentage / 100) * 171));
     }
 }
 
@@ -92,6 +93,7 @@ import { user } from "user-profile";
 var hrm = new HeartRateSensor();
 let hrLabel = document.getElementById("hrm");
 let hrLevel = document.getElementById("hrLevel");
+let hrBar = document.getElementById("health_bar");
 let hrmLastTimeStamp = 0;
 
 hrLabel.text = "??";
@@ -108,6 +110,7 @@ hrm.onreading = function(read) {
 
     hrLabel.text = heartRate;
     hrLevel.text = hrCustomZoneNames[`${hrZone}`];
+    hrBar.x = 39; //207
 
     hrm.stop();
 }
@@ -120,20 +123,21 @@ hrm.start();
 
 //INTERVAL
 import { display } from "display";
-setInterval(intervalFunction, 2000);
+setInterval(intervalFunction, 2500);
 
 function intervalFunction() {
+    if (display.on) {
+        hrm.start();
+    }
+
     updateSteps();
 
     if (hrmLastTimeStamp == hrm.timestamp) {
         hrLabel.text = '??';
         hrLevel.text = "Couch Potato";
+        hrBar.x = -168;
     } else {
         hrmLastTimeStamp = hrm.timestamp;
-    }
-
-    if (display.on) {
-        hrm.start();
     }
 }
 
