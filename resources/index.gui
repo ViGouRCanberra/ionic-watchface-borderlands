@@ -1,6 +1,6 @@
 <svg>
   <image href="img/bg.jpg" />
-
+  
   <mask id="mask">
     <image id="health_bar" x="-168" y="224" width="207" height="17" href="img/health.png" />
     <image id="shield_bar" x="-132" y="195" width="171" height="17" href="img/shield.png" />
@@ -11,17 +11,20 @@
     <image id="img_shield" href="img/shield.png" />
     <image id="img_xp" href="img/xp.png" />
   </svg>
-
+  
   <image href="img/bg_mask.png" />
   <image id="img_s_empty" href="img/s_empty.png" />
   <image id="img_s_full" href="img/s_full.png" />
-
+  
   <text id="currentSteps" class="font"></text>
   <text id="stepGoal" class="font"></text>
+  <text id="timeShadow" class="font"></text>
   <text id="time" class="font"></text>
   <text id="date" class="font"></text>
   <text id="dayOfWeek" class="font"></text>
+  <text id="hrmShadow" class="font"></text>
   <text id="hrm" class="font"></text>
+  <text id="batteryShadow" class="font"></text>
   <text id="battery" class="font"></text>
   <text id="level" class="font"></text>
   <text id="hrLevel" class="font">Couch Potato</text>

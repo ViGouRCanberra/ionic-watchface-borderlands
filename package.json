@@ -1,0 +1,18 @@
+{
+  "fitbit": {
+    "appUUID": "07d3316c-8550-424a-b19f-80fd2f0d0fcf",
+    "appType": "clockface",
+    "appDisplayName": "Borderlands",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [
+      "access_heart_rate",
+      "access_activity"
+    ],
+    "i18n": {
+      "en": {
+        "name": "Borderlands"
+      }
+    }
+  }
+}
