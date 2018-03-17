@@ -17,7 +17,7 @@ function updateSteps() {
     let stepPercentage = currentSteps / userActivity.goals.steps;
     xpBar.width = (currentSteps < userActivity.goals.steps)
       ? stepPercentage * 340
-      : 340;    
+      : 340;
   }
 }
 
@@ -33,10 +33,10 @@ batteryField.text = Math.floor(battery.chargeLevel);
 
 function updateBattery() {
   let batteryPercentage = Math.floor(battery.chargeLevel);
-  
+
   batteryField.text = batteryPercentage;
   batteryFieldSh.text = batteryPercentage;
-  
+
   if (batteryPercentage != 0) {
     // batteryBar.width = (batteryPercentage / 100) * 171;
     batteryBar.x = 39 - (171 - ((batteryPercentage / 100) * 171));
@@ -63,9 +63,9 @@ function updateDate() {
   let day = dayInfo.getDay();
   let month = dayInfo.getMonth();
   let dayOfMonth = dayInfo.getDate();
-  
+
   date.text = `${monthNames[month]} ${dayOfMonth}`;
-  dayOfWeek.text = `${dayNames[day]}`; 
+  dayOfWeek.text = `${dayNames[day]}`;
 }
 
 //CLOCK
@@ -86,7 +86,7 @@ function updateClock() {
 
   time.text = `${hours}:${mins}`;
   timeSh.text = `${hours}:${mins}`;
-  
+
   updateDate();
 }
 
@@ -114,12 +114,12 @@ let hrCustomZoneNames = {
 hrm.onreading = function(read) {
   let heartRate = hrm.heartRate;
   let hrZone = user.heartRateZone(heartRate);
-  
+
   hrLabel.text = heartRate;
   hrLabelSh.text = heartRate;
   hrLevel.text = hrCustomZoneNames[`${hrZone}`];
   hrBar.x = 39; //207
-  
+
   hrm.stop();
 }
 
@@ -142,7 +142,7 @@ function intervalFunction() {
         hrLevel.text = "Couch Potato";
         hrBar.x = -168;
     } else {
-        hrmLastTimeStamp = hrm.timestamp; 
+        hrmLastTimeStamp = hrm.timestamp;
     }
   }
 }
@@ -150,6 +150,7 @@ function intervalFunction() {
 display.onchange = function(event) {
   if (display.on) {
     hrm.start();
+    updateSteps();
   } else {
     hrm.stop();
   }
