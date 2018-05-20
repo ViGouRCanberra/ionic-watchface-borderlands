@@ -51,7 +51,7 @@ let date = document.getElementById('date');
 let dayOfWeek = document.getElementById('dayOfWeek');
 
 let monthNames = [
-    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
 let dayNames = [
