@@ -13,9 +13,9 @@
   </svg>
   
   <image href="img/bg_mask.png" />
-  <image id="img_s_empty" href="img/s_empty.png" />
   <image id="img_s_full" href="img/s_full.png" />
-  
+  <image id="img_s_empty" href="img/s_empty.png" />
+
   <text id="currentSteps" class="font"></text>
   <text id="stepGoal" class="font"></text>
   <text id="timeShadow" class="font"></text>

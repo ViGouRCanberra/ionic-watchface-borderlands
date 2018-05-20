@@ -9,16 +9,16 @@ let levelText = document.getElementById("level");
 let xpBar = document.getElementById("xp_bar");
 
 function updateSteps() {
-  currentStepsField.text = (userActivity.today.local.steps || 0)  + " /";
-  levelText.text = "Lv" + userActivity.today.local.elevationGain;
+    currentStepsField.text = (userActivity.today.local.steps || 0)  + " /";
+    levelText.text = "Lv" + userActivity.today.local.elevationGain;
 
-  if  (userActivity.goals.steps != 0) {
-    let currentSteps = (userActivity.today.local.steps || 0);
-    let stepPercentage = currentSteps / userActivity.goals.steps;
-    xpBar.width = (currentSteps < userActivity.goals.steps)
-      ? stepPercentage * 340
-      : 340;
-  }
+    if  (userActivity.goals.steps != 0) {
+        let currentSteps = (userActivity.today.local.steps || 0);
+        let stepPercentage = currentSteps / userActivity.goals.steps;
+        xpBar.width = (currentSteps < userActivity.goals.steps)
+            ? stepPercentage * 340
+            : 340;
+    }
 }
 
 stepGoalField.text = userActivity.goals.steps || 0;
@@ -28,19 +28,26 @@ import { battery } from "power";
 let batteryField = document.getElementById('battery');
 let batteryFieldSh = document.getElementById('batteryShadow');
 let batteryBar = document.getElementById('shield_bar');
+let batteryIndicatorEmpty = document.getElementById('img_s_empty');
 
 batteryField.text = Math.floor(battery.chargeLevel);
 
 function updateBattery() {
-  let batteryPercentage = Math.floor(battery.chargeLevel);
+    let batteryPercentage = Math.floor(battery.chargeLevel);
 
-  batteryField.text = batteryPercentage;
-  batteryFieldSh.text = batteryPercentage;
+    if (batteryPercentage > 30) {
+        batteryIndicatorEmpty.style.visibility = 'hidden';
+    } else {
+        batteryIndicatorEmpty.style.visibility = 'visible';
+    }
 
-  if (batteryPercentage != 0) {
-    // batteryBar.width = (batteryPercentage / 100) * 171;
-    batteryBar.x = 39 - (171 - ((batteryPercentage / 100) * 171));
-  }
+    batteryField.text = batteryPercentage;
+    batteryFieldSh.text = batteryPercentage;
+
+    if (batteryPercentage != 0) {
+        // batteryBar.width = (batteryPercentage / 100) * 171;
+        batteryBar.x = 39 - (171 - ((batteryPercentage / 100) * 171));
+    }
 }
 
 updateBattery();
@@ -59,13 +66,13 @@ let dayNames = [
 ];
 
 function updateDate() {
-  let dayInfo = new Date();
-  let day = dayInfo.getDay();
-  let month = dayInfo.getMonth();
-  let dayOfMonth = dayInfo.getDate();
+    let dayInfo = new Date();
+    let day = dayInfo.getDay();
+    let month = dayInfo.getMonth();
+    let dayOfMonth = dayInfo.getDate();
 
-  date.text = `${monthNames[month]} ${dayOfMonth}`;
-  dayOfWeek.text = `${dayNames[day]}`;
+    date.text = `${monthNames[month]} ${dayOfMonth}`;
+    dayOfWeek.text = `${dayNames[day]}`;
 }
 
 //CLOCK
@@ -78,16 +85,16 @@ let time = document.getElementById("time");
 let timeSh = document.getElementById("timeShadow");
 
 function updateClock() {
-  let today = new Date();
-  let hours = today.getHours();
-  hours = hours % 12;
-  hours = hours ? util.zeroPad(hours) : 12;
-  let mins = util.zeroPad(today.getMinutes());
+    let today = new Date();
+    let hours = today.getHours();
+    hours = hours % 12;
+    hours = hours ? util.zeroPad(hours) : 12;
+    let mins = util.zeroPad(today.getMinutes());
 
-  time.text = `${hours}:${mins}`;
-  timeSh.text = `${hours}:${mins}`;
+    time.text = `${hours}:${mins}`;
+    timeSh.text = `${hours}:${mins}`;
 
-  updateDate();
+    updateDate();
 }
 
 clock.ontick = () => updateClock();
@@ -105,26 +112,26 @@ let hrmLastTimeStamp = 0;
 
 hrLabel.text = "??";
 let hrCustomZoneNames = {
-  'out-of-range': 'Relaxed',
-  'fat-burn': 'Fat Burn',
-  'cardio': 'Cardio',
-  'peak': 'Peak'
+    'out-of-range': 'Relaxed',
+    'fat-burn': 'Fat Burn',
+    'cardio': 'Cardio',
+    'peak': 'Peak'
 };
 
 hrm.onreading = function(read) {
-  let heartRate = hrm.heartRate;
-  let hrZone = user.heartRateZone(heartRate);
+    let heartRate = hrm.heartRate;
+    let hrZone = user.heartRateZone(heartRate);
 
-  hrLabel.text = heartRate;
-  hrLabelSh.text = heartRate;
-  hrLevel.text = hrCustomZoneNames[`${hrZone}`];
-  hrBar.x = 39; //207
+    hrLabel.text = heartRate;
+    hrLabelSh.text = heartRate;
+    hrLevel.text = hrCustomZoneNames[`${hrZone}`];
+    hrBar.x = 39; //207
 
-  hrm.stop();
+    hrm.stop();
 }
 
 hrm.onerror = function() {
-  hrLabel.text = '??';
+    hrLabel.text = '??';
 }
 
 hrm.start();
@@ -134,24 +141,24 @@ import { display } from "display";
 setInterval(intervalFunction, 2500);
 
 function intervalFunction() {
-  if (display.on) {
-    hrm.start();
-    updateSteps();
+    if (display.on) {
+        hrm.start();
+        updateSteps();
 
-    if (hrmLastTimeStamp == hrm.timestamp) {
-        hrLevel.text = "Couch Potato";
-        hrBar.x = -168;
-    } else {
-        hrmLastTimeStamp = hrm.timestamp;
+        if (hrmLastTimeStamp == hrm.timestamp) {
+            hrLevel.text = "Couch Potato";
+            hrBar.x = -168;
+        } else {
+            hrmLastTimeStamp = hrm.timestamp;
+        }
     }
-  }
 }
 
 display.onchange = function(event) {
-  if (display.on) {
-    hrm.start();
-    updateSteps();
-  } else {
-    hrm.stop();
-  }
+    if (display.on) {
+        hrm.start();
+        updateSteps();
+    } else {
+        hrm.stop();
+    }
 };
