@@ -29,6 +29,7 @@ let batteryField = document.getElementById('battery');
 let batteryFieldSh = document.getElementById('batteryShadow');
 let batteryBar = document.getElementById('shield_bar');
 let batteryIndicatorEmpty = document.getElementById('img_s_empty');
+let batteryIndicatorFull = document.getElementById('img_s_full');
 
 batteryField.text = Math.floor(battery.chargeLevel);
 
@@ -37,8 +38,10 @@ function updateBattery() {
 
     if (batteryPercentage > 30) {
         batteryIndicatorEmpty.style.visibility = 'hidden';
+        batteryIndicatorFull.style.visibility = 'visible';
     } else {
         batteryIndicatorEmpty.style.visibility = 'visible';
+        batteryIndicatorFull.style.visibility = 'hidden';
     }
 
     batteryField.text = batteryPercentage;
