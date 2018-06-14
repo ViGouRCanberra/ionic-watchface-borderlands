@@ -15,17 +15,22 @@
   <image href="img/bg_mask.png" />
   <image id="img_s_full" href="img/s_full.png" />
   <image id="img_s_empty" href="img/s_empty.png" />
-
-  <text id="currentSteps" class="font"></text>
+  
+  <text id="currentSteps" class="font">---- /</text>
   <text id="stepGoal" class="font"></text>
-  <text id="timeShadow" class="font"></text>
-  <text id="time" class="font"></text>
+  <svg>
+    <image id="timeH1" x="92" y="88" width="31" height="53" href="img/font/0.png" />
+    <image id="timeH2" x="125" y="88" width="31" height="53" href="img/font/0.png" />
+    <image id="timeH2" x="162" y="97" width="17" height="37" href="img/font/colon.png" />
+    <image id="timeM1" x="182" y="88" width="31" height="53" href="img/font/0.png" />
+    <image id="timeM2" x="215" y="88" width="31" height="53" href="img/font/0.png" />
+  </svg>
   <text id="date" class="font"></text>
   <text id="dayOfWeek" class="font"></text>
   <text id="hrmShadow" class="font"></text>
   <text id="hrm" class="font"></text>
   <text id="batteryShadow" class="font"></text>
   <text id="battery" class="font"></text>
-  <text id="level" class="font"></text>
+  <text id="level" class="font">Lv --</text>
   <text id="hrLevel" class="font">Couch Potato</text>
 </svg>

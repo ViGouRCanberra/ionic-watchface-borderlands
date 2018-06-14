@@ -25,6 +25,7 @@ stepGoalField.text = userActivity.goals.steps || 0;
 
 //BATTERY
 import { battery } from "power";
+
 let batteryField = document.getElementById('battery');
 let batteryFieldSh = document.getElementById('batteryShadow');
 let batteryBar = document.getElementById('shield_bar');
@@ -79,28 +80,56 @@ function updateDate() {
 }
 
 //CLOCK
+import { preferences } from "user-settings";
 import clock from "clock";
 import * as util from "../common/utils";
 
 clock.granularity = "minutes";
 
-let time = document.getElementById("time");
-let timeSh = document.getElementById("timeShadow");
+let numH1 = document.getElementById("timeH1");
+let numH2 = document.getElementById("timeH2");
+let numM1 = document.getElementById("timeM1");
+let numM2 = document.getElementById("timeM2");
 
 function updateClock() {
     let today = new Date();
     let hours = today.getHours();
-    hours = hours % 12;
-    hours = hours ? util.zeroPad(hours) : 12;
-    let mins = util.zeroPad(today.getMinutes());
+    let mins = today.getMinutes();
 
-    time.text = `${hours}:${mins}`;
-    timeSh.text = `${hours}:${mins}`;
+    if (preferences.clockDisplay === "12h") {
+        // 12h format
+        hours = hours % 12 || 12;
+    } else {
+        // 24h format
+        hours = util.zeroPad(hours);
+    }
+
+    setHours(hours);
+    setMins(mins);
 
     updateDate();
 }
 
 clock.ontick = () => updateClock();
+
+function setHours(val) {
+  if (val > 9) {
+      drawDigit(Math.floor(val / 10), numH1);
+  } else {
+      drawDigit("0", numH1);
+  }
+
+  drawDigit(Math.floor(val % 10), numH2);
+}
+
+function setMins(val) {
+    drawDigit(Math.floor(val / 10), numM1);
+    drawDigit(Math.floor(val % 10), numM2);   
+}
+
+function drawDigit(val, place) {
+    place.image = `img/font/${val}.png`;
+}
 
 //HEART RATE MONITOR
 import { HeartRateSensor } from "heart-rate";

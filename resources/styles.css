@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 #img_health {
   x: 39;
   y: 224;

@@ -7,7 +7,11 @@
     "wipeColor": "",
     "requestedPermissions": [
       "access_heart_rate",
-      "access_activity"
+      "access_activity",
+      "access_user_profile"
+    ],
+    "buildTargets": [
+      "higgs"
     ],
     "i18n": {
       "en": {
