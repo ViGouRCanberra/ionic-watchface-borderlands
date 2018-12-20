@@ -12,7 +12,7 @@ function updateSteps() {
     currentStepsField.text = (userActivity.today.local.steps || 0)  + " /";
     levelText.text = "Lv" + userActivity.today.local.elevationGain;
 
-    if  (userActivity.goals.steps != 0) {
+    if  (userActivity.goals.steps !== 0) {
         let currentSteps = (userActivity.today.local.steps || 0);
         let stepPercentage = currentSteps / userActivity.goals.steps;
         xpBar.width = (currentSteps < userActivity.goals.steps)
@@ -48,7 +48,7 @@ function updateBattery() {
     batteryField.text = batteryPercentage;
     batteryFieldSh.text = batteryPercentage;
 
-    if (batteryPercentage != 0) {
+    if (batteryPercentage !== 0) {
         // batteryBar.width = (batteryPercentage / 100) * 171;
         batteryBar.x = 39 - (171 - ((batteryPercentage / 100) * 171));
     }
@@ -150,7 +150,7 @@ let hrCustomZoneNames = {
     'peak': 'Peak'
 };
 
-hrm.onreading = function(read) {
+hrm.onreading = function() {
     let heartRate = hrm.heartRate;
     let hrZone = user.heartRateZone(heartRate);
 
@@ -160,11 +160,11 @@ hrm.onreading = function(read) {
     hrBar.x = 39; //207
 
     hrm.stop();
-}
+};
 
 hrm.onerror = function() {
     hrLabel.text = '??';
-}
+};
 
 hrm.start();
 
@@ -177,7 +177,7 @@ function intervalFunction() {
         hrm.start();
         updateSteps();
 
-        if (hrmLastTimeStamp == hrm.timestamp) {
+        if (hrmLastTimeStamp === hrm.timestamp) {
             hrLevel.text = "Couch Potato";
             hrBar.x = -168;
         } else {
@@ -186,7 +186,7 @@ function intervalFunction() {
     }
 }
 
-display.onchange = function(event) {
+display.onchange = function() {
     if (display.on) {
         hrm.start();
         updateSteps();
