@@ -8,7 +8,7 @@
     "@fitbit/sdk-cli": "^1.5.0"
   },
   "fitbit": {
-    "appUUID": "9fc5d7f7-6637-4138-9a0e-6d0284e5b67d",
+    "appUUID": "07d3316c-8550-424a-b19f-80fd2f0d0fcf",
     "appType": "clockface",
     "appDisplayName": "Borderlands",
     "iconFile": "resources/icon.png",
