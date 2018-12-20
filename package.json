@@ -1,22 +1,26 @@
 {
+  "name": "borderlands",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@fitbit/sdk": "~1.0.4",
+    "@fitbit/sdk-cli": "^1.5.0"
+  },
   "fitbit": {
-    "appUUID": "07d3316c-8550-424a-b19f-80fd2f0d0fcf",
+    "appUUID": "9fc5d7f7-6637-4138-9a0e-6d0284e5b67d",
     "appType": "clockface",
     "appDisplayName": "Borderlands",
     "iconFile": "resources/icon.png",
-    "wipeColor": "",
-    "requestedPermissions": [
-      "access_heart_rate",
-      "access_activity",
-      "access_user_profile"
-    ],
+    "wipeColor": "#ffffff",
+    "requestedPermissions": [],
     "buildTargets": [
       "higgs"
     ],
-    "i18n": {
-      "en": {
-        "name": "Borderlands"
-      }
-    }
+    "i18n": {}
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
   }
 }
